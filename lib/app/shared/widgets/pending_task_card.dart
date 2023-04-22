@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:todo_lopes/app/models/todo_list_model.dart';
 import 'package:todo_lopes/app/shared/themes/themes.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
-import 'package:todo_lopes/app/views/auth_page.dart';
 
 class PendingTaskCard extends StatelessWidget {
-  final TodoList todoList;
+  final TodoListModel todoList;
   const PendingTaskCard({super.key, required this.todoList});
 
   int pendingTasksTotal() {
     int pendingTasksTotal = 0;
     todoList.items.map((task) {
-      if (!task.isDone) {
+      if (task.isDone) {
         pendingTasksTotal = pendingTasksTotal + 1;
       }
     }).toList();
