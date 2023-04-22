@@ -8,6 +8,7 @@ const orangeColor = Color(0xFFFF8A00);
 const pinkColor = Color(0xFFD42EA5);
 const greenColor = Color(0xFF2DA04D);
 const secondaryGreenColor = Color(0xFFC5E6C6);
+const greyTextcolor = Color(0xFF7F7F7F);
 
 CustomColors lightCustomColors = const CustomColors(
   sourcePrimaryblue: Color(0xFF039EF6),
@@ -50,6 +51,11 @@ CustomColors lightCustomColors = const CustomColors(
   onSecondarygreencolor: Color(0xFFFFFFFF),
   secondarygreencolorContainer: Color(0xFF9FF6AE),
   onSecondarygreencolorContainer: Color(0xFF00210B),
+  sourceGreytextcolor: Color(0xFF7F7F7F),
+  greytextcolor: Color(0xFF006874),
+  onGreytextcolor: Color(0xFFFFFFFF),
+  greytextcolorContainer: Color(0xFF97F0FF),
+  onGreytextcolorContainer: Color(0xFF001F24),
 );
 
 CustomColors darkCustomColors = const CustomColors(
@@ -93,6 +99,11 @@ CustomColors darkCustomColors = const CustomColors(
   onSecondarygreencolor: Color(0xFF003917),
   secondarygreencolorContainer: Color(0xFF005224),
   onSecondarygreencolorContainer: Color(0xFF9FF6AE),
+  sourceGreytextcolor: Color(0xFF7F7F7F),
+  greytextcolor: Color(0xFF4FD8EB),
+  onGreytextcolor: Color(0xFF00363D),
+  greytextcolorContainer: Color(0xFF004F58),
+  onGreytextcolorContainer: Color(0xFF97F0FF),
 );
 
 /// Defines a set of custom colors, each comprised of 4 complementary tones.
@@ -142,6 +153,11 @@ class CustomColors extends ThemeExtension<CustomColors> {
     required this.onSecondarygreencolor,
     required this.secondarygreencolorContainer,
     required this.onSecondarygreencolorContainer,
+    required this.sourceGreytextcolor,
+    required this.greytextcolor,
+    required this.onGreytextcolor,
+    required this.greytextcolorContainer,
+    required this.onGreytextcolorContainer,
   });
 
   final Color? sourcePrimaryblue;
@@ -184,6 +200,11 @@ class CustomColors extends ThemeExtension<CustomColors> {
   final Color? onSecondarygreencolor;
   final Color? secondarygreencolorContainer;
   final Color? onSecondarygreencolorContainer;
+  final Color? sourceGreytextcolor;
+  final Color? greytextcolor;
+  final Color? onGreytextcolor;
+  final Color? greytextcolorContainer;
+  final Color? onGreytextcolorContainer;
 
   @override
   CustomColors copyWith({
@@ -227,6 +248,11 @@ class CustomColors extends ThemeExtension<CustomColors> {
     Color? onSecondarygreencolor,
     Color? secondarygreencolorContainer,
     Color? onSecondarygreencolorContainer,
+    Color? sourceGreytextcolor,
+    Color? greytextcolor,
+    Color? onGreytextcolor,
+    Color? greytextcolorContainer,
+    Color? onGreytextcolorContainer,
   }) {
     return CustomColors(
       sourcePrimaryblue: sourcePrimaryblue ?? this.sourcePrimaryblue,
@@ -278,6 +304,13 @@ class CustomColors extends ThemeExtension<CustomColors> {
           secondarygreencolorContainer ?? this.secondarygreencolorContainer,
       onSecondarygreencolorContainer:
           onSecondarygreencolorContainer ?? this.onSecondarygreencolorContainer,
+      sourceGreytextcolor: sourceGreytextcolor ?? this.sourceGreytextcolor,
+      greytextcolor: greytextcolor ?? this.greytextcolor,
+      onGreytextcolor: onGreytextcolor ?? this.onGreytextcolor,
+      greytextcolorContainer:
+          greytextcolorContainer ?? this.greytextcolorContainer,
+      onGreytextcolorContainer:
+          onGreytextcolorContainer ?? this.onGreytextcolorContainer,
     );
   }
 
@@ -350,6 +383,14 @@ class CustomColors extends ThemeExtension<CustomColors> {
           secondarygreencolorContainer, other.secondarygreencolorContainer, t),
       onSecondarygreencolorContainer: Color.lerp(onSecondarygreencolorContainer,
           other.onSecondarygreencolorContainer, t),
+      sourceGreytextcolor:
+          Color.lerp(sourceGreytextcolor, other.sourceGreytextcolor, t),
+      greytextcolor: Color.lerp(greytextcolor, other.greytextcolor, t),
+      onGreytextcolor: Color.lerp(onGreytextcolor, other.onGreytextcolor, t),
+      greytextcolorContainer:
+          Color.lerp(greytextcolorContainer, other.greytextcolorContainer, t),
+      onGreytextcolorContainer: Color.lerp(
+          onGreytextcolorContainer, other.onGreytextcolorContainer, t),
     );
   }
 

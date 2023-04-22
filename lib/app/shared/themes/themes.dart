@@ -8,4 +8,7 @@ final theme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: salmonColor,
   ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: primaryBlue,
+  ),
 );
