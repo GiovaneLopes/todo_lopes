@@ -48,7 +48,6 @@ class TodoListController {
           todoListComplete.value + todoListPending.value + [todoListModel];
       await userRef.set(totalList.map((item) => item.toJson()).toList());
     } finally {
-      await getUserTodoLists();
       isLoading.value = false;
     }
   }

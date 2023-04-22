@@ -91,6 +91,16 @@ class TodoListModel {
     );
   }
 
+  factory TodoListModel.empty() {
+    return TodoListModel(
+      title: '',
+      items: [],
+      color: salmonColor,
+      dateCreated: DateTime.now(),
+      isComplete: false,
+    );
+  }
+
   String toJson() => json.encode(toMap());
 
   factory TodoListModel.fromJson(String source) =>

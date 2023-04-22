@@ -7,6 +7,7 @@ import 'package:todo_lopes/app/shared/widgets/custom_floating_action_button.dart
 import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
 import 'package:todo_lopes/app/shared/widgets/done_task_card.dart';
 import 'package:todo_lopes/app/shared/widgets/pending_task_card.dart';
+import 'package:todo_lopes/app/views/new_todo_list_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,7 +23,14 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.grey[200],
       floatingActionButton: CustomFloatingActionButton(
         onPressed: () {
-       
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const NewTodoListPage(),
+            ),
+          ).then((value) async {
+            await todoListController.getUserTodoLists();
+          });
         },
         child: Icon(
           Icons.add,
@@ -70,9 +78,9 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.only(bottom: 22),
                         child: DoneTaskCard(
                           title: todoListController
-                              .todoListPending.value.last.title,
+                              .todoListComplete.value.last.title,
                           timeConclued: todoListController
-                              .todoListPending.value.last.dateCreated,
+                              .todoListComplete.value.last.dateCreated,
                         ),
                       ),
                     const TabBar(
@@ -102,11 +110,13 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           (todoListController.todoListPending.value.isNotEmpty)
                               ? ListView.builder(
+                                  padding: const EdgeInsets.all(0),
                                   itemCount: todoListController
                                       .todoListPending.value.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return ListTile(
+                                      contentPadding: const EdgeInsets.all(0),
                                       title: Padding(
                                         padding:
                                             const EdgeInsets.only(bottom: 22),
@@ -143,16 +153,17 @@ class _HomePageState extends State<HomePage> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return ListTile(
+                                      contentPadding: const EdgeInsets.all(0),
                                       title: Padding(
                                         padding:
                                             const EdgeInsets.only(bottom: 22),
                                         child: DoneTaskCard(
                                           title: todoListController
-                                              .todoListPending
+                                              .todoListComplete
                                               .value[index]
                                               .title,
                                           timeConclued: todoListController
-                                              .todoListPending
+                                              .todoListComplete
                                               .value[index]
                                               .dateCreated,
                                         ),

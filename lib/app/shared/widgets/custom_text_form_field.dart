@@ -17,8 +17,8 @@ class CustomTextFormField extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.onError, width: 2),
+          borderSide:
+              BorderSide(color: Theme.of(context).colorScheme.error, width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
