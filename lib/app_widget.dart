@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_lopes/app/controllers/auth_controller.dart';
 import 'package:todo_lopes/app/shared/themes/themes.dart';
 import 'package:todo_lopes/app/views/auth_page.dart';
+import 'package:todo_lopes/app/views/home_page.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -16,11 +17,7 @@ class AppWidget extends StatelessWidget {
         valueListenable: authController.isSignedIn,
         builder: (context, value, _) {
           if (value == true) {
-            return const Scaffold(
-              body: Center(
-                child: Text('Home'),
-              ),
-            );
+            return const HomePage();
           } else {
             return const AuthPage();
           }

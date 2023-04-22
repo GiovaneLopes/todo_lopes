@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo_lopes/app/models/task_item_model.dart';
 import 'package:todo_lopes/app/shared/themes/themes.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
-import 'package:todo_lopes/app/views/auth_page.dart';
 
 class CustomCheckBox extends StatelessWidget {
-  final TaskItem item;
+  final TaskItemModel item;
   final Color? color;
   final Function(bool?) onChanged;
   final Function()? onDelete;
