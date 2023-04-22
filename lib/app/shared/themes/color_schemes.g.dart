@@ -34,6 +34,7 @@ const _lightColorScheme = ColorScheme(
   scrim: Color(0xFF000000),
 );
 
+// ignore: unused_element
 const _darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
   primary: Color(0xFFCFBCFF),
