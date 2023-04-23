@@ -7,6 +7,7 @@ import 'package:todo_lopes/app/shared/widgets/custom_floating_action_button.dart
 import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
 import 'package:todo_lopes/app/shared/widgets/done_task_card.dart';
 import 'package:todo_lopes/app/shared/widgets/pending_task_card.dart';
+import 'package:todo_lopes/app/views/edit_todo_list_page.dart';
 import 'package:todo_lopes/app/views/new_todo_list_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -79,8 +80,6 @@ class _HomePageState extends State<HomePage> {
                         child: DoneTaskCard(
                           title: todoListController
                               .todoListComplete.value.last.title,
-                          timeConclued: todoListController
-                              .todoListComplete.value.last.dateCreated,
                         ),
                       ),
                     const TabBar(
@@ -120,9 +119,30 @@ class _HomePageState extends State<HomePage> {
                                       title: Padding(
                                         padding:
                                             const EdgeInsets.only(bottom: 22),
-                                        child: PendingTaskCard(
-                                          todoList: todoListController
-                                              .todoListPending.value[index],
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditTodoListPage(
+                                                  todoListModel:
+                                                      todoListController
+                                                          .todoListPending
+                                                          .value[index],
+                                                ),
+                                              ),
+                                            ).then(
+                                              (value) async {
+                                                await todoListController
+                                                    .getUserTodoLists();
+                                              },
+                                            );
+                                          },
+                                          child: PendingTaskCard(
+                                            todoList: todoListController
+                                                .todoListPending.value[index],
+                                          ),
                                         ),
                                       ),
                                     );
@@ -152,20 +172,36 @@ class _HomePageState extends State<HomePage> {
                                       .todoListComplete.value.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return ListTile(
-                                      contentPadding: const EdgeInsets.all(0),
-                                      title: Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 22),
-                                        child: DoneTaskCard(
-                                          title: todoListController
-                                              .todoListComplete
-                                              .value[index]
-                                              .title,
-                                          timeConclued: todoListController
-                                              .todoListComplete
-                                              .value[index]
-                                              .dateCreated,
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditTodoListPage(
+                                              todoListModel: todoListController
+                                                  .todoListComplete
+                                                  .value[index],
+                                            ),
+                                          ),
+                                        ).then(
+                                          (value) async {
+                                            await todoListController
+                                                .getUserTodoLists();
+                                          },
+                                        );
+                                      },
+                                      child: ListTile(
+                                        contentPadding: const EdgeInsets.all(0),
+                                        title: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 22),
+                                          child: DoneTaskCard(
+                                            title: todoListController
+                                                .todoListComplete
+                                                .value[index]
+                                                .title,
+                                          ),
                                         ),
                                       ),
                                     );

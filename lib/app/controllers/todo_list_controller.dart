@@ -19,20 +19,23 @@ class TodoListController {
     try {
       isLoading.value = true;
       final userRef =
-          FirebaseDatabase.instance.ref().child('Users').child(userId);
+          FirebaseDatabase.instance.ref().child('users-todos').child(userId);
       DataSnapshot data = await userRef.get();
+      todoListComplete.value.clear();
+      todoListPending.value.clear();
       if (data.value != null) {
-        final todoMap = data.value as List;
-        todoListComplete.value.clear();
-        todoListPending.value.clear();
-        for (var e in todoMap) {
-          final list = TodoListModel.fromJson(e.toString());
-          if (list.isComplete == true) {
-            todoListComplete.value.add(list);
-          } else {
-            todoListPending.value.add(list);
-          }
-        }
+        final todoMap = data.value as Map<dynamic, dynamic>;
+        todoMap.forEach(
+          (key, value) {
+            final list =
+                TodoListModel.fromJson(value.toString()).copyWith(id: key);
+            if (list.isComplete == true) {
+              todoListComplete.value.add(list);
+            } else {
+              todoListPending.value.add(list);
+            }
+          },
+        );
       }
     } finally {
       isLoading.value = false;
@@ -43,10 +46,36 @@ class TodoListController {
     try {
       isLoading.value = true;
       final userRef =
-          FirebaseDatabase.instance.ref().child('Users').child(userId);
-      final totalList =
-          todoListComplete.value + todoListPending.value + [todoListModel];
-      await userRef.set(totalList.map((item) => item.toJson()).toList());
+          FirebaseDatabase.instance.ref().child('users-todos').child(userId);
+      await userRef.push().set(todoListModel.toJson());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> updateTodoList(TodoListModel todoListModel) async {
+    try {
+      isLoading.value = true;
+      final userRef = FirebaseDatabase.instance
+          .ref()
+          .child('users-todos')
+          .child(userId)
+          .child(todoListModel.id!);
+      await userRef.set(todoListModel.toJson());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> removeTodoList(TodoListModel todoListModel) async {
+    try {
+      isLoading.value = true;
+      final userRef = FirebaseDatabase.instance
+          .ref()
+          .child('users-todos')
+          .child(userId)
+          .child(todoListModel.id!);
+      await userRef.remove();
     } finally {
       isLoading.value = false;
     }

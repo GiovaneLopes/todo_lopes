@@ -4,11 +4,9 @@ import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
 
 class DoneTaskCard extends StatelessWidget {
   final String title;
-  final DateTime timeConclued;
   const DoneTaskCard({
     super.key,
     required this.title,
-    required this.timeConclued,
   });
 
   @override
@@ -40,11 +38,6 @@ class DoneTaskCard extends StatelessWidget {
                   )
                 ],
               ),
-              CustomText(
-                '${timeConclued.hour}h',
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-              )
             ],
           ),
           Row(

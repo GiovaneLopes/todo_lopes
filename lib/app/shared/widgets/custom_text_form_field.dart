@@ -3,13 +3,16 @@ import 'package:todo_lopes/app/shared/themes/themes.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
-  const CustomTextFormField({super.key, required this.controller});
+  final Function(String?)? onChanged;
+  const CustomTextFormField(
+      {super.key, required this.controller, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.text,
+      onChanged: onChanged,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
