@@ -53,12 +53,6 @@ class PendingTaskCard extends StatelessWidget {
                   ],
                 ),
               ),
-              CustomText(
-                '${todoList.dateCreated.hour}',
-                color: lightCustomColors.sourceGreytextcolor,
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-              )
             ],
           ),
           const SizedBox(
