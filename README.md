@@ -18,6 +18,14 @@ Email-me: [giovanelopes@id.uff.br](mailto:giovanelopes@id.uff.br)
 
 LinkedIn: [Giovane Lopes - Linkedin](https://www.linkedin.com/in/giovane-lopes-da-silva-1228b3167/)
 
+## Technologies Used
+
+- Flutter
+- Dart
+- GetX
+- Firebase
+- MVC
+
 ## Installation and Usage
 To install and use the project, follow these steps:
 
