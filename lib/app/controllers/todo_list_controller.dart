@@ -1,18 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:todo_lopes/app/models/todo_list_model.dart';
 
-class TodoListController {
+class TodoListController extends GetxController {
   TodoListController() {
     userId = FirebaseAuth.instance.currentUser!.uid;
     getUserTodoLists();
   }
-  final ValueNotifier<List<TodoListModel>> todoListComplete =
-      ValueNotifier<List<TodoListModel>>([]);
-  final ValueNotifier<List<TodoListModel>> todoListPending =
-      ValueNotifier<List<TodoListModel>>([]);
-  final ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
+  final todoListComplete = [].obs;
+  final todoListPending = [].obs;
+  final isLoading = false.obs;
   late String userId;
 
   Future<void> getUserTodoLists() async {
@@ -21,8 +19,8 @@ class TodoListController {
       final userRef =
           FirebaseDatabase.instance.ref().child('users-todos').child(userId);
       DataSnapshot data = await userRef.get();
-      todoListComplete.value.clear();
-      todoListPending.value.clear();
+      todoListComplete.clear();
+      todoListPending.clear();
       if (data.value != null) {
         final todoMap = data.value as Map<dynamic, dynamic>;
         todoMap.forEach(
@@ -30,9 +28,9 @@ class TodoListController {
             final list =
                 TodoListModel.fromJson(value.toString()).copyWith(id: key);
             if (list.isComplete == true) {
-              todoListComplete.value.add(list);
+              todoListComplete.add(list);
             } else {
-              todoListPending.value.add(list);
+              todoListPending.add(list);
             }
           },
         );

@@ -17,6 +17,7 @@ dependencies:
   firebase_auth: ^4.4.2
   firebase_database: ^10.1.1
   flutter_svg: ^2.0.5
+  get: ^4.6.5
 
 flutter_launcher_icons:
   android: "launcher_icon"

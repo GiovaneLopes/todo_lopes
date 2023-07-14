@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_lopes/app/controllers/todo_list_controller.dart';
 import 'package:todo_lopes/app/models/task_item_model.dart';
 import 'package:todo_lopes/app/models/todo_list_model.dart';
@@ -16,7 +17,7 @@ class NewTodoListPage extends StatefulWidget {
 }
 
 class _NewTodoListPageState extends State<NewTodoListPage> {
-  final TodoListController todoListController = TodoListController();
+  final TodoListController todoListController = Get.put(TodoListController());
   TodoListModel newTodoList = TodoListModel.empty();
   final TextEditingController todoListNameController = TextEditingController();
   final TextEditingController taskNameController = TextEditingController();
@@ -41,9 +42,10 @@ class _NewTodoListPageState extends State<NewTodoListPage> {
               ),
             );
             // ignore: use_build_context_synchronously
-            Navigator.pop(context);
+            Get.back();
           }
         },
+        backgroundColor: selectedColor,
         label: CustomText(
           'Salvar',
           fontWeight: FontWeight.bold,
@@ -106,7 +108,7 @@ class _NewTodoListPageState extends State<NewTodoListPage> {
                       children: itens
                           .map(
                             (task) => CustomCheckBox(
-                              color: primaryBlue,
+                              color: selectedColor,
                               item: task,
                               onDelete: () {
                                 setState(() {
@@ -187,6 +189,7 @@ class _NewTodoListPageState extends State<NewTodoListPage> {
                                           Expanded(
                                             child:
                                                 FloatingActionButton.extended(
+                                              backgroundColor: selectedColor,
                                               onPressed: () {
                                                 if (taskItemFormKey
                                                     .currentState!
@@ -223,12 +226,13 @@ class _NewTodoListPageState extends State<NewTodoListPage> {
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.add),
+                          children:  [
+                            Icon(Icons.add,color: selectedColor,),
                             CustomText(
                               'Novo Item',
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
+                              color: selectedColor,
                             ),
                           ],
                         ),

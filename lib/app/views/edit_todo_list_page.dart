@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_lopes/app/controllers/todo_list_controller.dart';
 import 'package:todo_lopes/app/models/task_item_model.dart';
 import 'package:todo_lopes/app/models/todo_list_model.dart';
@@ -41,9 +42,10 @@ class _EditTodoListPageState extends State<EditTodoListPage> {
           if (todoListFormKey.currentState!.validate()) {
             await todoListController.updateTodoList(widget.todoListModel);
             // ignore: use_build_context_synchronously
-            Navigator.pop(context);
+            Get.back();
           }
         },
+        backgroundColor: widget.todoListModel.color,
         label: CustomText(
           'Salvar',
           fontWeight: FontWeight.bold,
@@ -62,15 +64,18 @@ class _EditTodoListPageState extends State<EditTodoListPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () => Get.back(),
                       icon: const Icon(
                         Icons.arrow_back,
                       ),
                     ),
-                    CustomText(
-                      widget.todoListModel.title,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: CustomText(
+                        widget.todoListModel.title,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        maxLines: 2,
+                      ),
                     ),
                     IconButton(
                       onPressed: () async {
@@ -118,7 +123,7 @@ class _EditTodoListPageState extends State<EditTodoListPage> {
                       children: widget.todoListModel.items
                           .map(
                             (task) => CustomCheckBox(
-                              color: primaryBlue,
+                              color: widget.todoListModel.color,
                               item: task,
                               onDelete: () {
                                 setState(() {
@@ -199,6 +204,8 @@ class _EditTodoListPageState extends State<EditTodoListPage> {
                                           Expanded(
                                             child:
                                                 FloatingActionButton.extended(
+                                              backgroundColor:
+                                                  widget.todoListModel.color,
                                               onPressed: () {
                                                 if (taskItemFormKey
                                                     .currentState!
@@ -236,12 +243,13 @@ class _EditTodoListPageState extends State<EditTodoListPage> {
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.add),
+                          children: [
+                            Icon(Icons.add, color: widget.todoListModel.color),
                             CustomText(
                               'Novo Item',
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
+                              color: widget.todoListModel.color,
                             ),
                           ],
                         ),

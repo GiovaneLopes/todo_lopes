@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_lopes/app/controllers/auth_controller.dart';
 import 'package:todo_lopes/app/shared/themes/themes.dart';
 import 'package:todo_lopes/app/views/auth_page.dart';
@@ -9,14 +10,13 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthController authController = AuthController();
-    return MaterialApp(
+    final AuthController authController = Get.put(AuthController());
+    return GetMaterialApp(
       title: 'Todo Lopes',
       theme: theme,
-      home: ValueListenableBuilder(
-        valueListenable: authController.isSignedIn,
-        builder: (context, value, _) {
-          if (value == true) {
+      home: Obx(
+        () {
+          if (authController.isSignedIn.value == true) {
             return const HomePage();
           } else {
             return const AuthPage();

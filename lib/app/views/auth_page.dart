@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_lopes/app/controllers/auth_controller.dart';
 
 import 'package:todo_lopes/app/shared/resources/images.dart';
@@ -15,7 +16,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
-  final AuthController authController = AuthController();
+  final AuthController authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,17 +85,14 @@ class _AuthPageState extends State<AuthPage> {
             const SizedBox(
               height: 28,
             ),
-            ValueListenableBuilder(
-              valueListenable: authController.isLoading,
-              builder: (context, value, _) {
-                if (value == true) {
-                  return const CircularProgressIndicator(
-                    color: primaryBlue,
-                  );
-                }
-                return Container();
-              },
-            ),
+            Obx(() {
+              if (authController.isLoading.value == true) {
+                return const CircularProgressIndicator(
+                  color: primaryBlue,
+                );
+              }
+              return Container();
+            }),
           ],
         ),
       ),

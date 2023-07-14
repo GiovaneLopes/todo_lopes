@@ -51,6 +51,7 @@ class CustomCheckBox extends StatelessWidget {
             fontWeight: FontWeight.w500,
             fontSize: 18,
             color: item.isDone == true ? color : null,
+            maxLines: 2,
             textDecoration:
                 item.isDone == true ? TextDecoration.lineThrough : null,
           ),

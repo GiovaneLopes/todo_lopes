@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:todo_lopes/app/controllers/todo_list_controller.dart';
 import 'package:todo_lopes/app/shared/resources/images.dart';
-import 'package:todo_lopes/app/shared/themes/themes.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_floating_action_button.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
 import 'package:todo_lopes/app/shared/widgets/done_task_card.dart';
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final TodoListController todoListController = TodoListController();
+    final TodoListController todoListController = Get.put(TodoListController());
     return Scaffold(
       backgroundColor: Colors.grey[200],
       floatingActionButton: CustomFloatingActionButton(
@@ -41,77 +41,69 @@ class _HomePageState extends State<HomePage> {
       body: DefaultTabController(
         length: 2,
         child: SafeArea(
-          child: AnimatedBuilder(
-            animation: Listenable.merge(
-              [
-                todoListController.todoListComplete,
-                todoListController.todoListPending,
-                todoListController.isLoading
-              ],
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(
+              left: 28,
+              right: 28,
+              top: 40,
             ),
-            builder: (_, __) {
-              if (todoListController.isLoading.value == true) {
-                return const Center(
-                    child: CircularProgressIndicator(
-                  color: primaryBlue,
-                ));
-              }
-              return Container(
-                width: double.infinity,
-                padding: const EdgeInsets.only(
-                  left: 28,
-                  right: 28,
-                  top: 40,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const CustomText(
+                  'Todo Lopes',
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const CustomText(
-                      'Todo Lopes',
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const SizedBox(
-                      height: 36,
-                    ),
-                    if (todoListController.todoListComplete.value.isNotEmpty)
-                      Padding(
+                const SizedBox(
+                  height: 36,
+                ),
+                Obx(
+                  () {
+                    if (todoListController.todoListComplete.isNotEmpty) {
+                      return Padding(
                         padding: const EdgeInsets.only(bottom: 22),
                         child: DoneTaskCard(
-                          title: todoListController
-                              .todoListComplete.value.last.title,
+                          title: todoListController.todoListComplete.last.title,
                         ),
-                      ),
-                    const TabBar(
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                      unselectedLabelStyle: TextStyle(
-                        fontWeight: FontWeight.normal,
-                      ),
-                      indicatorColor: Colors.transparent,
-                      dividerColor: Colors.transparent,
-                      tabs: [
-                        Tab(
-                            child: CustomText(
-                          'Pendentes',
-                          fontSize: 18,
-                        )),
-                        Tab(
-                            child: CustomText(
-                          'Concluídas',
-                          fontSize: 18,
-                        )),
-                      ],
-                    ),
-                    Expanded(
-                      child: TabBarView(
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                const TabBar(
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  unselectedLabelStyle: TextStyle(
+                    fontWeight: FontWeight.normal,
+                  ),
+                  indicatorColor: Colors.transparent,
+                  dividerColor: Colors.transparent,
+                  tabs: [
+                    Tab(
+                        child: CustomText(
+                      'Pendentes',
+                      fontSize: 18,
+                    )),
+                    Tab(
+                        child: CustomText(
+                      'Concluídas',
+                      fontSize: 18,
+                    )),
+                  ],
+                ),
+                Expanded(
+                  child: Obx(
+                    () {
+                      return TabBarView(
                         children: [
-                          (todoListController.todoListPending.value.isNotEmpty)
+                          (todoListController.todoListPending.isNotEmpty)
                               ? ListView.builder(
                                   padding: const EdgeInsets.all(0),
-                                  itemCount: todoListController
-                                      .todoListPending.value.length,
+                                  itemCount:
+                                      todoListController.todoListPending.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return ListTile(
@@ -128,8 +120,8 @@ class _HomePageState extends State<HomePage> {
                                                     EditTodoListPage(
                                                   todoListModel:
                                                       todoListController
-                                                          .todoListPending
-                                                          .value[index],
+                                                              .todoListPending[
+                                                          index],
                                                 ),
                                               ),
                                             ).then(
@@ -141,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                                           },
                                           child: PendingTaskCard(
                                             todoList: todoListController
-                                                .todoListPending.value[index],
+                                                .todoListPending[index],
                                           ),
                                         ),
                                       ),
@@ -166,10 +158,10 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                          (todoListController.todoListComplete.value.isNotEmpty)
+                          (todoListController.todoListComplete.isNotEmpty)
                               ? ListView.builder(
                                   itemCount: todoListController
-                                      .todoListComplete.value.length,
+                                      .todoListComplete.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return GestureDetector(
@@ -180,8 +172,7 @@ class _HomePageState extends State<HomePage> {
                                             builder: (context) =>
                                                 EditTodoListPage(
                                               todoListModel: todoListController
-                                                  .todoListComplete
-                                                  .value[index],
+                                                  .todoListComplete[index],
                                             ),
                                           ),
                                         ).then(
@@ -198,9 +189,7 @@ class _HomePageState extends State<HomePage> {
                                               const EdgeInsets.only(bottom: 22),
                                           child: DoneTaskCard(
                                             title: todoListController
-                                                .todoListComplete
-                                                .value[index]
-                                                .title,
+                                                .todoListComplete[index].title,
                                           ),
                                         ),
                                       ),
@@ -226,12 +215,12 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                         ],
-                      ),
-                    ),
-                  ],
+                      );
+                    },
+                  ),
                 ),
-              );
-            },
+              ],
+            ),
           ),
         ),
       ),
