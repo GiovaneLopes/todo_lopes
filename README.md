@@ -29,7 +29,7 @@ To install and use the project, follow these steps:
 
 - Navigate to the project directory.
 
-`cd mobile_challenge`
+`cd todo_lopes`
 
 - Run the command to fetch the necessary dependencies.
 
