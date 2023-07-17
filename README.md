@@ -2,7 +2,7 @@
 
 ![Screenshot](assets/images/todo_lopes.png)
 
-If you want to take a look on Figma project, [its here](https://docs.flutter.dev/get-started/codelab).
+If you want to take a look on Figma project, [its here](https://www.figma.com/file/Q7aGCgMfBWbYgfS3KtLa54/Todo-Lopes?type=design&node-id=0%3A1&mode=design&t=5Yz4jrHKS69LCCrI-1).
 
 ## About this Project
 
@@ -18,6 +18,14 @@ Email-me: [giovanelopes@id.uff.br](mailto:giovanelopes@id.uff.br)
 
 LinkedIn: [Giovane Lopes - Linkedin](https://www.linkedin.com/in/giovane-lopes-da-silva-1228b3167/)
 
+## Technologies Used
+
+- Flutter
+- Dart
+- GetX
+- Firebase
+- MVC
+
 ## Installation and Usage
 To install and use the project, follow these steps:
 
@@ -29,7 +37,7 @@ To install and use the project, follow these steps:
 
 - Navigate to the project directory.
 
-`cd mobile_challenge`
+`cd todo_lopes`
 
 - Run the command to fetch the necessary dependencies.
 
