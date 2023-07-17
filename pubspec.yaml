@@ -1,0 +1,51 @@
+name: todo_lopes
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.5 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  firebase_core: ^2.10.0
+  auto_size_text: ^3.0.0
+  google_sign_in: ^6.1.0
+  firebase_auth: ^4.4.2
+  firebase_database: ^10.1.1
+  flutter_svg: ^2.0.5
+  get: ^4.6.5
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/launch_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/fonts/
+
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/quicksand/Quicksand-Light.ttf
+          weight: 300
+        - asset: assets/fonts/quicksand/Quicksand-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/quicksand/Quicksand-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/quicksand/Quicksand-Bold.ttf
+          weight: 700

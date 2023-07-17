@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "613738408623",
+    "project_id": "todo-lopes",
+    "storage_bucket": "todo-lopes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613738408623:android:5261e3b350313850f0425a",
+        "android_client_info": {
+          "package_name": "com.example.todo_lopes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613738408623-bvs2ndrb068o8l2shtpe29vu5g7e612j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeSJ9_bay5D6v5Y3CJfiN915aWama8SMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613738408623-bvs2ndrb068o8l2shtpe29vu5g7e612j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

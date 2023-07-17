@@ -2,7 +2,7 @@
 
 ![Screenshot](assets/images/todo_lopes.png)
 
-If you want to take a look on Figma project, [its here](https://docs.flutter.dev/get-started/codelab).
+If you want to take a look on Figma project, [its here](https://www.figma.com/file/Q7aGCgMfBWbYgfS3KtLa54/Todo-Lopes?type=design&node-id=0%3A1&mode=design&t=5Yz4jrHKS69LCCrI-1).
 
 ## About this Project
 
