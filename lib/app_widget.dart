@@ -12,7 +12,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     return GetMaterialApp(
-      title: 'Todo Lopes',
+      title: 'To-do Lopes',
       theme: theme,
       home: Obx(
         () {

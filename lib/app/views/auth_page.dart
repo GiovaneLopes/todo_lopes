@@ -46,7 +46,7 @@ class _AuthPageState extends State<AuthPage> {
               fontWeight: FontWeight.w400,
             ),
             const CustomText(
-              'Todo Lopes',
+              'To-do Lopes',
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
@@ -54,7 +54,7 @@ class _AuthPageState extends State<AuthPage> {
               height: 28,
             ),
             CustomText(
-              'Todo Lopes te ajuda a organizar e realizar suas tarefas mais rápido',
+              'To-do Lopes te ajuda a organizar e realizar suas tarefas mais rápido',
               fontSize: 18,
               minFontSize: 14,
               maxLines: 2,

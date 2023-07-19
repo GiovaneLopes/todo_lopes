@@ -6,6 +6,7 @@ import 'package:todo_lopes/app/models/todo_list_model.dart';
 import 'package:todo_lopes/app/shared/themes/themes.dart';
 import 'package:todo_lopes/app/shared/widgets/color_button.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_check_box.dart';
+import 'package:todo_lopes/app/shared/widgets/custom_dialog.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_text_form_field.dart';
 
@@ -55,7 +56,7 @@ class _EditTodoListPageState extends State<EditTodoListPage> {
       ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.only(left: 28, right: 28, top: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 40),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,14 +76,27 @@ class _EditTodoListPageState extends State<EditTodoListPage> {
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                         maxLines: 2,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     IconButton(
                       onPressed: () async {
-                        await todoListController
-                            .removeTodoList(widget.todoListModel);
-                        // ignore: use_build_context_synchronously
-                        Navigator.pop(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const CustomDialog(
+                                title: 'Deletar',
+                                subtitle:
+                                    'Tem certeza que deseja deletas essa lista?',
+                              );
+                            }).then((value) async {
+                          if (value == true) {
+                            await todoListController
+                                .removeTodoList(widget.todoListModel);
+                            // ignore: use_build_context_synchronously
+                            Navigator.pop(context);
+                          }
+                        });
                       },
                       icon: const Icon(
                         Icons.delete_outline_outlined,

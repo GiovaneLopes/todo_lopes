@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:todo_lopes/app/controllers/auth_controller.dart';
 import 'package:todo_lopes/app/controllers/todo_list_controller.dart';
 import 'package:todo_lopes/app/shared/resources/images.dart';
+import 'package:todo_lopes/app/shared/widgets/custom_dialog.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_floating_action_button.dart';
 import 'package:todo_lopes/app/shared/widgets/custom_text.dart';
 import 'package:todo_lopes/app/shared/widgets/done_task_card.dart';
@@ -20,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final TodoListController todoListController = Get.put(TodoListController());
+    final AuthController authController = Get.put(AuthController());
     return Scaffold(
       backgroundColor: Colors.grey[200],
       floatingActionButton: CustomFloatingActionButton(
@@ -51,10 +54,35 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const CustomText(
-                  'Todo Lopes',
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 36,
+                    ),
+                    const CustomText(
+                      'To-do Lopes',
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const CustomDialog(
+                                title: 'Sair',
+                                subtitle: 'Tem certeza que deseja sair?',
+                              );
+                            }).then((value) {
+                          if (value == true) {
+                            authController.signOut();
+                          }
+                        });
+                      },
+                      icon: const Icon(Icons.logout),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 36,
